@@ -1,262 +1,1308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- ... (existing content, put this in your About Me, Profile Card, or wherever you want the hacker blinking animation) ... -->
+
+<!-- Add this HTML wherever you want the hacker blinking animation to appear (e.g., inside your about/profile card): -->
+<div class="hacker-eyes-container" style="margin:0 auto;display:flex;justify-content:center;align-items:center;">
+  <div class="hacker-face" style="position:relative;width:72px;height:72px;">
+    <div class="hacker-eye hacker-eye-left"></div>
+    <div class="hacker-eye hacker-eye-right"></div>
+    <div class="hacker-mouth"></div>
+    <div class="hacker-hood"></div>
+  </div>
+</div>
+
+<!-- Add this CSS to your <style> section (or global CSS): -->
+<style>
+.hacker-eyes-container { margin: 0 auto 18px auto; }
+.hacker-face {
+  position: relative; width: 72px; height: 72px;
+  background: radial-gradient(ellipse at center, #0e283d 60%, #061727 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 30px #00ffea33, 0 0 9px #00ffea;
+  overflow: visible;
+}
+.hacker-hood {
+  position: absolute; left: -8px; top: -14px;
+  width: 88px; height: 46px;
+  background: linear-gradient(120deg, #00ffe4 18%, #061727 100%);
+  border-radius: 50% 50% 40% 40%/80% 80% 36% 36%;
+  z-index: 1;
+  opacity: 0.11;
+}
+.hacker-eye {
+  position: absolute;
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  top: 28px;
+  box-shadow: 0 0 10px #00ffea, 0 0 4px #fff;
+  z-index: 2;
+  overflow: hidden;
+}
+.hacker-eye-left { left: 16px; }
+.hacker-eye-right { right: 16px; }
+.hacker-eye::after {
+  content: "";
+  display: block;
+  width: 10px; height: 10px;
+  background: #00ffe4;
+  border-radius: 50%;
+  position: absolute;
+  left: 4px; top: 4px;
+  animation: hacker-eye-blink 4s infinite, hacker-eye-move 5s infinite alternate;
+  box-shadow: 0 0 14px #00ffea99;
+}
+.hacker-eye-right::after {
+  animation-delay: 0.2s, 0s;
+}
+.hacker-eye-left::after {
+  animation-delay: 0s, 0.13s;
+}
+@keyframes hacker-eye-blink {
+  0%, 7%, 100% { height: 10px; }
+  8%, 10% { height: 2px; }
+  11%, 100% { height: 10px; }
+}
+@keyframes hacker-eye-move {
+  0% { left: 4px; top: 4px; }
+  25% { left: 2px; top: 5px; }
+  50% { left: 6px; top: 4px; }
+  70% { left: 4px; top: 7px; }
+  100% { left: 4px; top: 4px; }
+}
+.hacker-mouth {
+  position: absolute;
+  left: 25px; top: 51px;
+  width: 22px; height: 10px;
+  border-bottom: 3px solid #00ffe4;
+  border-radius: 0 0 18px 18px;
+  z-index: 3;
+  opacity: 0.65;
+  filter: blur(0.5px);
+}
+</style>
+    <!-- ... previous content ... -->
+<div class="page" id="numberlock-page" style="margin-top:100px;">
+  <div id="numberlock-content" ...>
+    <!-- ... -->
+  </div>
+</div>
+<!-- Number Lock Section (or Pattern Lock, wherever your secret portal/unlock is) -->
+<div class="page" id="numberlock-page">
+  <div id="numberlock-content" tabindex="0" title="Enter the correct code to unlock a special message!">
+    <h2>Number Lock</h2>
+    <div style="max-width:340px;margin:0 auto;">
+      <div class="pattern-instruction">Enter the secret 4-digit code and press Unlock!</div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:18px;">
+        <input id="numlock1" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
+        <input id="numlock2" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
+        <input id="numlock3" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
+        <input id="numlock4" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
+      </div>
+      <button onclick="checkNumberLock()" style="background:#00ffea;color:#001;font-weight:bold;padding:10px 32px;border-radius:8px;border:none;box-shadow:0 0 12px #00fff7;font-size:1.1em;cursor:pointer;">Unlock</button>
+      <div id="numberlock-status" class="pattern-status" style="margin-top:16px;"></div>
+      <div id="numberlock-secret" style="margin-top:18px;display:none;">
+        <!-- START: Animated Profile Card -->
+        <div id="animated-profile-card" style="max-width:410px;margin:0 auto 25px auto;padding:28px 20px 22px 20px;background:linear-gradient(120deg,#061727 80%,#00ffea33 100%);border-radius:18px;box-shadow:0 0 40px #00ffea66,0 0 8px #fff2;border:2.5px solid #00ffea;position:relative;overflow:hidden;animation:profile-pop 1.4s cubic-bezier(.55,1.7,.6,1.1) 1;">
+          <div style="position:absolute;top:-80px;left:-50px;width:200px;height:200px;z-index:0;pointer-events:none;opacity:0.13;">
+            <svg width="200" height="200">
+              <circle cx="100" cy="100" r="80" fill="#00ffe4" filter="url(#profile-glow)" />
+              <defs>
+                <filter id="profile-glow">
+                  <feGaussianBlur stdDeviation="18" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+            </svg>
+          </div>
+          <div style="z-index:2;position:relative;">
+            <img src="https://avatars.githubusercontent.com/u/13453738?v=4" alt="Nitesh Kumar" width="100" height="100" style="border-radius:50%;border:3px solid #00ffea;box-shadow:0 0 22px #00ffea99,0 0 12px #fff4;background:#061727;margin-bottom:12px;animation:profile-img-glow 2.1s infinite alternate;">
+            <h2 style="color:#fff;margin:0 0 6px 0;letter-spacing:2px;font-size:1.4em;text-shadow:0 0 10px #00ffea;">Nitesh Kumar</h2>
+            <p style="margin:0 0 7px 0;color:#00ffea;font-size:1.09em;font-weight:bold;letter-spacing:1.2px;">@Nitesh8757</p>
+            <div style="margin:0 0 10px 0;">
+              <a href="https://github.com/Nitesh8757" target="_blank" style="color:#fff;background:#00ffea;padding:6px 16px;border-radius:7px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #00ffea;transition:.18s;">GitHub</a>
+              <a href="https://twitter.com/Nitesh8757" target="_blank" style="color:#00ffea;background:#fff;padding:6px 16px;border-radius:7px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #00ffea;margin-left:7px;transition:.18s;">Twitter/X</a>
+            </div>
+            <div style="color:#dff;font-size:1.03em;line-height:1.45;max-width:330px;margin:0 auto;">
+              🚀 Web Dev, Cyber Enthusiast, Animation Geek.<br>
+              <span style="color:#00ffe4;">Galactic Hacker. Portal Creator. Infinite HTML Animator.</span>
+            </div>
+          </div>
+          <!-- Animated cyber rings SVG -->
+          <svg viewBox="0 0 240 120" width="230" height="110" style="position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);z-index:1;pointer-events:none;">
+            <ellipse cx="120" cy="60" rx="98" ry="43" fill="none" stroke="#00ffea" stroke-width="2.5" opacity="0.26"/>
+            <ellipse cx="120" cy="60" rx="70" ry="28" fill="none" stroke="#00fff7" stroke-width="2" opacity="0.14"/>
+            <ellipse cx="120" cy="60" rx="110" ry="53" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.09"/>
+            <circle cx="120" cy="60" r="5" fill="#00ffea" opacity="0.17">
+              <animate attributeName="r" values="5;27;5" dur="3.2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.17;0.01;0.17" dur="3.2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <!-- Flying cyber icon -->
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="47" style="position:absolute;top:5px;right:8px;animation:fly-spin 4.4s linear infinite;">
+        </div>
+        <style>
+          @keyframes profile-pop {
+            0% { transform: scale(0.7) rotate(-20deg);}
+            70% { transform: scale(1.08) rotate(5deg);}
+            100% { transform: scale(1) rotate(0deg);}
+          }
+          @keyframes profile-img-glow {
+            0% { box-shadow:0 0 22px #00ffea99,0 0 12px #fff4;}
+            100% { box-shadow:0 0 40px #00ffea,0 0 22px #fff;}
+          }
+          @keyframes fly-spin {
+            0% { transform: rotate(0deg) scale(1);}
+            90% { transform: rotate(340deg) scale(1.18);}
+            100% { transform: rotate(360deg) scale(1);}
+          }
+        </style>
+        <!-- END: Animated Profile Card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ... (rest of your HTML, such as contact/footer, remains unchanged) ... -->
+
+<script>
+  // ... (your other scripts above remain unchanged) ...
+
+  // --- Number Lock logic ---
+  const numberLockCode = ['8','7','5','7']; // You can change this code if you wish
+  // Autofocus/auto tab
+  ['numlock1','numlock2','numlock3','numlock4'].forEach((id, idx, arr) => {
+    let el = document.getElementById(id);
+    el.addEventListener('input', function() {
+      if (this.value.length === 1 && idx < 3) {
+        arr[idx+1] && document.getElementById(arr[idx+1]).focus();
+      }
+    });
+    el.addEventListener('keydown', function(e){
+      if (e.key === 'Backspace' && this.value === '' && idx > 0) {
+        arr[idx-1] && document.getElementById(arr[idx-1]).focus();
+      }
+    });
+  });
+  function checkNumberLock() {
+    const val =
+      document.getElementById('numlock1').value +
+      document.getElementById('numlock2').value +
+      document.getElementById('numlock3').value +
+      document.getElementById('numlock4').value;
+    const status = document.getElementById('numberlock-status');
+    if (val === numberLockCode.join('')) {
+      status.textContent = "✅ Correct code! Number lock opened!";
+      document.getElementById('numberlock-secret').style.display = 'block';
+    } else {
+      status.textContent = "❌ Wrong code! Try again.";
+      document.getElementById('numberlock-secret').style.display = 'none';
+    }
+  }
+</script>
   <meta charset="UTF-8">
-  <title>Nitesh </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galactic Hacker Animation Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
+    
     html, body {
-      margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif;
-      background: #101820; color: #fff; scroll-behavior: smooth;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #061727 0%, #000 100%);
+      font-family: 'Fira Mono', 'Consolas', 'monospace', 'Segoe UI', sans-serif;
+      color: #00ffea;
+      letter-spacing: 1.2px;
+      overflow-x: hidden;
     }
-    nav {
-      position: fixed; top:0; left:0; width:100%; background:rgba(16,24,32,0.9); z-index:1000;
-      display:flex; justify-content:center; align-items:center; padding: 10px 0; box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    .page {
+      min-height: 100vh;
+      width: 100vw;
+      position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
-    nav a {
-      color: #ffcf00; text-decoration:none; margin:0 18px; font-weight:600; font-size:18px;
-      transition: color 0.2s;
+    #main-page {
+      z-index: 1;
+      position: relative;
     }
-    nav a:hover { color: #fff; text-shadow: 0 0 10px #ffcf00; }
-    section {
-      min-height:100vh; padding:100px 8vw 60px 8vw;
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      position:relative;
+    #aboutus-page, #certificate-page, #games-page, #pattern-page {
+      z-index: 2;
+      background: linear-gradient(135deg, #061727 80%, #03101e 100%);
+      border-top: 3px solid #00ffea66;
+      box-shadow: 0 -8px 40px #00ffea33;
+      position: relative;
+      width: 100vw;
     }
-    h1, h2 { margin-bottom: 18px; }
-    .fade-in { opacity:0; transform:translateY(40px); animation: fadeIn 1.3s forwards; }
-    @keyframes fadeIn {
-      to { opacity:1; transform:translateY(0);}
+    .section-sep {
+      width: 100vw;
+      height: 30px;
+      background: repeating-linear-gradient(90deg, #00ffea 0 6px, #000 6px 36px);
+      margin: 0;
+      border: 0;
+      opacity: 0.15;
+      box-shadow: 0 0 12px #00ffea66;
     }
-    .slide-in {
-      opacity:0; transform:translateX(-100vw); animation: slideIn 1.2s forwards;
+    #aboutus-content, #certificate-content, #games-content, #pattern-content {
+      max-width: 1140px;
+      margin: 60px auto 40px auto;
+      padding: 36px 24px 30px 24px;
+      background: rgba(13,40,55,0.95);
+      border-radius: 22px;
+      box-shadow: 0 0 40px #00ffea44;
+      text-align: center;
     }
-    @keyframes slideIn {
-      to { opacity:1; transform:translateX(0);}
+    #aboutus-content h2, #certificate-content h2, #games-content h2, #pattern-content h2 {
+      margin: 0 0 15px 0;
+      color: #00fff7;
+      letter-spacing: 2px;
+      font-size: 2em;
+      text-shadow: 0 0 12px #0ff7;
     }
-    .bounce { animation: bounce 2s infinite; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0);}
-      40% { transform: translateY(-30px);}
-      60% { transform: translateY(-15px);}
+    #aboutus-content p, #certificate-content p, #games-content p, #pattern-content p {
+      margin: 0 0 7px 0;
+      color: #00ffea;
+      opacity: 0.93;
+      font-size: 1.15em;
+      line-height: 1.7;
     }
-    .spin { display:inline-block; animation:spin 4s linear infinite;}
-    @keyframes spin { 100% { transform:rotate(360deg); } }
-    .typewriter {
-      overflow: hidden; border-right: .15em solid #ffcf00; white-space: nowrap;
-      margin: 0 auto; letter-spacing: .15em; animation: typing 2.8s steps(30, end), blink-caret 0.7s step-end infinite;
-      font-size:2em;
+    #aboutus-content b, #certificate-content b, #games-content b, #pattern-content b {
+      color: #fff;
+      text-shadow: 0 0 8px #00fff7;
     }
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink-caret { 50% { border-color: transparent } }
-    .morph {
-      width:120px; height:120px; background: linear-gradient(45deg,#ffcf00,#f68d2e 70%); 
-      border-radius: 60% 40% 50% 70%/70% 60% 40% 50%; transition: border-radius 1.5s, background 1.5s; margin:30px auto;
-      animation: morphing 4s infinite alternate;
+    #aboutus-content .about-logo, #certificate-content .cert-logo {
+      display: block;
+      margin: 0 auto 17px auto;
+      width: 110px;
+      filter: drop-shadow(0 0 18px #0ff6);
     }
-    @keyframes morphing {
-      0% { border-radius:60% 40% 50% 70%/70% 60% 40% 50%; background: linear-gradient(45deg,#ffcf00,#f68d2e 70%);}
-      100% { border-radius: 40% 60% 70% 50%/60% 70% 50% 40%; background: linear-gradient(45deg,#f68d2e,#ffcf00 70%);}
+    /* Certificate Style */
+    .certificate-box {
+      background: linear-gradient(120deg, #061727 80%, #00ffea33 100%);
+      border: 2.5px solid #00fff7;
+      border-radius: 16px;
+      margin: 30px auto;
+      padding: 28px 20px 24px 20px;
+      max-width: 500px;
+      box-shadow: 0 0 50px #00ffea55;
+      color: #fff;
+      text-shadow: 0 0 7px #00fff7cc;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      position: relative;
+      animation: cert-glow 2.4s infinite alternate;
     }
-    .certificate-cards {
-      display:flex; gap:30px; flex-wrap:wrap; justify-content:center;
+    @keyframes cert-glow {
+      0% { box-shadow: 0 0 50px #00ffea22; border-color: #00fff7; }
+      100% { box-shadow: 0 0 80px #00ffea88; border-color: #fff; }
     }
-    .card {
-      background:rgba(255,255,255,0.08); border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.15);
-      padding:28px 22px; min-width:220px; transition: transform 0.4s, box-shadow 0.4s;
-      position:relative; overflow:hidden;
+    .certificate-title {
+      font-size: 1.6em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      color: #00fff7;
+      text-shadow: 0 0 10px #00ffea;
     }
-    .card:hover {
-      transform:scale(1.06) rotate(-2deg); box-shadow:0 8px 20px #ffcf0090;
-      background: rgba(255, 207, 0, 0.18);
+    .certificate-name {
+      font-size: 1.25em;
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
-    .profile-img {
-      width:110px; height:110px; border-radius:50%; border:4px solid #ffcf00;
-      object-fit:cover; margin-bottom:16px; box-shadow:0 2px 10px #f68d2e66;
-      animation: spin 8s linear infinite;
+    .certificate-details {
+      font-size: 1.07em;
+      margin-bottom: 12px;
+      color: #00ffea;
+      opacity: 0.93;
     }
-    .icon {
-      font-size:2em; margin: 0 12px; transition: transform 0.2s;
+    .certificate-issue {
+      font-size: 0.98em;
+      color: #00fff7;
     }
-    .icon:hover { transform: scale(1.2) rotate(15deg); color:#ffcf00; }
-    .contact-form input, .contact-form textarea {
-      width: 90%; max-width: 360px; padding: 10px; margin: 10px 0;
-      border-radius: 7px; border: none; font-size: 16px; background: #181d27; color: #fff;
-      box-shadow: 0 2px 8px rgba(255,207,0,0.08);
-      transition: background 0.2s;
+    .certificate-id {
+      position: absolute;
+      bottom: 10px;
+      right: 16px;
+      color: #00ffe4;
+      font-size: 0.83em;
+      opacity: 0.7;
     }
-    .contact-form input:focus, .contact-form textarea:focus {
-      background: #232841; outline: none;
+    /* Games styles */
+    .game-box {
+      margin: 30px auto 10px auto;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      gap: 40px 30px;
+      max-width: 1200px;
     }
-    .contact-form button {
-      background:#ffcf00; color:#101820; font-weight:700; border:none; padding:12px 28px; border-radius:8px;
-      cursor:pointer; transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 10px #f68d2e44;
+    .mini-game {
+      background: #0f1a21cc;
+      border: 2px solid #00ffea;
+      border-radius: 13px;
+      box-shadow: 0 0 20px #00ffea44;
+      padding: 16px 20px;
+      min-width: 220px;
+      min-height: 120px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 10px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      transition: transform 0.18s, box-shadow 0.18s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    .contact-form button:hover { background:#f68d2e; color:#fff;}
-    /* Particle background for Home */
-    #particles-js {
-      position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;
+    .mini-game:hover {
+      box-shadow: 0 0 40px #00fff7cc;
+      transform: scale(1.04) rotate(-2deg);
+      background: #03101e;
     }
-    .content { position:relative; z-index:1; }
-    /* Section backgrounds */
-    #home    { background:linear-gradient(120deg,#101820 60%, #21304c 100%);}
-    #aboutme { background:linear-gradient(120deg,#21304c 60%, #101820 100%);}
-    #aboutus { background:linear-gradient(120deg,#101820 60%, #ffcf00 100%);}
-    #profile { background:#181d27;}
-    #certificate { background:linear-gradient(120deg,#f68d2e 60%, #101820 100%);}
-    #contact { background:linear-gradient(120deg,#101820 60%, #f68d2e 100%);}
+    .mini-game h3 {
+      margin: 0 0 6px 0;
+      color: #00fff7;
+      font-size: 1.1em;
+      letter-spacing: 1.2px;
+      text-shadow: 0 0 4px #00ffea;
+    }
+    /* Pattern lock styles */
+    .pattern-lock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 32px auto 6px auto;
+    }
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 56px);
+      grid-template-rows: repeat(3, 56px);
+      gap: 18px;
+      background: rgba(0,255,234,0.07);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 0 18px #00fff744;
+      user-select: none;
+      touch-action: none;
+    }
+    .pattern-dot {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: #05141d;
+      border: 2.7px solid #00fff7;
+      box-shadow: 0 0 12px #00ffea33;
+      margin: 0;
+      transition: background 0.18s, border 0.18s;
+      cursor: pointer;
+      position: relative;
+    }
+    .pattern-dot.active, .pattern-dot.selected {
+      background: #00ffea;
+      border-color: #fff;
+      box-shadow: 0 0 30px #00fff7cc;
+    }
+    .pattern-instruction {
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 1.18em;
+      opacity: 0.85;
+    }
+    .pattern-status {
+      color: #00fff7;
+      font-size: 1.1em;
+      margin-top: 9px;
+      min-height: 20px;
+      letter-spacing: 1.2px;
+      font-weight: bold;
+    }
+    /* Terminal, Matrix, Infinite Animations as before */
+    #matrix-rain {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      z-index: 50;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    #hacker-terminal {
+      position: fixed;
+      left: 6vw; top: 5vh;
+      width: 88vw; max-width: 900px;
+      height: 43vh; max-height: 340px;
+      background: rgba(9,19,29,0.89);
+      border: 2px solid #0ff;
+      border-radius: 14px;
+      box-shadow: 0 0 40px #0ff8;
+      overflow: hidden;
+      z-index: 100;
+      pointer-events: auto;
+      color: #0ff;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    #hacker-terminal .term-header {
+      padding: 7px 18px 3px 18px;
+      color: #00fff7;
+      font-size: 1.1em;
+      font-weight: bold;
+      letter-spacing: 1.8px;
+      text-shadow: 0 0 12px #0ff5;
+      border-bottom: 1px solid #00ffea66;
+      background: linear-gradient(90deg,#04202e,#0ff4, #04202e);
+    }
+    #terminal-content {
+      font-size: 1.02em;
+      padding: 12px 20px 10px 20px;
+      color: #00ffea;
+      min-height: 180px;
+      letter-spacing: 1.3px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-y: auto;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      text-shadow: 0 0 8px #0ff4;
+    }
+    #container {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      left: 0; top: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .flying {
+      position: absolute;
+      pointer-events: auto;
+      opacity: 0.94;
+      will-change: transform;
+      z-index: 2;
+      animation-timing-function: linear;
+      filter: drop-shadow(0 0 8px #0ff6);
+      transition: filter 0.25s, transform 0.25s;
+      user-select: none;
+      cursor: pointer;
+    }
+    .flying:hover {
+      filter: drop-shadow(0 0 24px #fff) brightness(1.22);
+      z-index: 20;
+      transform: scale(1.28) rotate(-8deg) !important;
+      animation-play-state: paused !important;
+      border: 2.5px solid #fff;
+      background: linear-gradient(90deg, #fff, #0ff, #fff) !important;
+    }
+    .flying:active {
+      filter: drop-shadow(0 0 36px #fff) brightness(1.5);
+      transform: scale(1.4) rotate(0deg) !important;
+      background: #00ffea !important;
+      color: #000 !important;
+    }
+    .flying.button {
+      background: linear-gradient(90deg,#0ff,#0fa,#00c8ff,#0ff);
+      border: 2px solid #00ffea;
+      border-radius: 10px;
+      color: #001;
+      font-weight: bold;
+      font-size: 1.1em;
+      padding: 12px 36px;
+      text-shadow: 0 0 10px #0ff6;
+      box-shadow: 0 0 18px #0ff9;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+    .flying.input, .flying.textarea {
+      border: 2px solid #00ffea;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 1em;
+      background: #0f1a21aa;
+      color: #0ff;
+      box-shadow: 0 0 10px #0ff5;
+      outline: none;
+    }
+    .flying.img {
+      border-radius: 12px;
+      box-shadow: 0 0 30px #0ff6, 0 0 10px #020c;
+      filter: grayscale(0.5) brightness(1.2);
+    }
+    .flying.progress, .flying.meter {
+      width: 110px;
+      height: 20px;
+      accent-color: #0ff;
+      background: #0f1a21cc;
+      border-radius: 7px;
+      box-shadow: 0 0 8px #0ff4;
+    }
+    .flying.audio, .flying.video {
+      width: 140px;
+      height: 34px;
+      background: #0f1a21cc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0ff5;
+      border: 1.5px solid #00ffea;
+    }
+    .flying.select {
+      background: #0f1a21cc;
+      color: #00ffea;
+      border-radius: 7px;
+      padding: 6px 14px;
+      font-size: 1em;
+      border: 2px solid #00ffea;
+      box-shadow: 0 0 8px #0ff6;
+    }
+    .flying.code {
+      background: #081a21cc;
+      color: #00ffe4;
+      padding: 10px 16px;
+      border-radius: 7px;
+      font-family: 'Fira Mono',monospace;
+      font-size: 1em;
+      box-shadow: 0 0 15px #0ff6;
+      border: 1.5px solid #00ffea;
+    }
+    .flying.svg {
+      background: transparent;
+    }
+    .flying.iframe {
+      border: 2.5px solid #00ffe4;
+      border-radius: 13px;
+      box-shadow: 0 0 22px #0ff7;
+    }
+    .flying.table {
+      background: #0f1a21cc;border-radius:10px;overflow:hidden;
+      box-shadow: 0 0 14px #0ff7;
+      border: 1.5px solid #00ffea;
+    }
+    .flying.canvas {
+      border: 2.5px solid #00ffea;
+      border-radius: 9px;
+      background: #02121d;
+      box-shadow: 0 0 18px #0ff7;
+    }
+    @keyframes fly1 {
+      from { transform: translateY(110vh) rotate(0deg) scale(1); }
+      to { transform: translateY(-30vh) rotate(360deg) scale(1.12); }
+    }
+    @keyframes fly2 {
+      from { transform: translateX(-20vw) translateY(100vh) scale(1); }
+      to { transform: translateX(120vw) translateY(-10vh) scale(0.8); }
+    }
+    @keyframes fly3 {
+      from { transform: translateY(110vh) scale(0.7) rotateY(0deg); }
+      to { transform: translateY(-30vh) scale(1.25) rotateY(360deg); }
+    }
+    @keyframes fly4 {
+      from { transform: translate(0,120vh) rotate(-90deg) scale(1.1);}
+      to { transform: translate(100vw,-20vh) rotate(270deg) scale(0.7);}
+    }
+    @keyframes fadeInOut {
+      0%{opacity:0;}
+      5%{opacity:1;}
+      90%{opacity:1;}
+      100%{opacity:0;}
+    }
+    #aboutus-content,
+    #certificate-content,
+    #games-content,
+    #pattern-content {
+      transition: box-shadow 0.35s, border 0.3s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    #aboutus-content:hover,
+    #certificate-content:hover,
+    #games-content:hover,
+    #pattern-content:hover {
+      box-shadow: 0 0 90px #00fff7cc, 0 0 44px #fff3;
+      border: 2px solid #00ffea;
+      background: rgba(13,40,55,1);
+      animation: aboutus-wiggle 0.55s linear 1;
+    }
+    @keyframes aboutus-wiggle {
+      0% { transform: scale(1) rotate(0deg);}
+      20%{ transform: scale(1.05) rotate(2deg);}
+      40%{ transform: scale(1.09) rotate(-2deg);}
+      60%{ transform: scale(1.11) rotate(2deg);}
+      80%{ transform: scale(1.07) rotate(-2deg);}
+      100%{ transform: scale(1) rotate(0deg);}
+    }
+    #contact {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100vw;
+      background: rgba(10,25,36,0.95);
+      border-top: 2px solid #00ffea;
+      color: #0ff;
+      padding: 18px 0 6px 0;
+      text-align: center;
+      font-size: 1.13em;
+      letter-spacing: 2px;
+      z-index: 1000;
+      box-shadow: 0 -1px 36px #00ffea44;
+      user-select: text;
+    }
+    #contact a {
+      color: #fff;
+      background: #00ffea;
+      padding: 5px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 7px;
+      box-shadow: 0 0 8px #0ff7;
+      letter-spacing: 1.4px;
+      transition: background 0.15s, color 0.15s;
+    }
+    #contact a:hover {
+      background: #fff;
+      color: #00ffea;
+    }
     /* Responsive */
-    @media (max-width: 700px) {
-      nav { font-size:15px; }
-      section { padding:70px 3vw 40px 3vw;}
-      .certificate-cards { flex-direction:column; gap:20px;}
-      .profile-img { width:80px; height:80px; }
+    @media (max-width: 800px) {
+      .game-box { gap: 22px 10px; }
+      .mini-game { min-width: 98vw; }
     }
   </style>
-  <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#aboutme">About Me</a>
-    <a href="#aboutus">About Us</a>
-    <a href="#profile">Profile</a>
-    <a href="#certificate">Certificate</a>
-    <a href="#contact">Contact Us</a>
-  </nav>
+  <canvas id="matrix-rain"></canvas>
+  <div id="hacker-terminal">
+    <div class="term-header">[ GALACTIC HACKER SHELL ]</div>
+    <div id="terminal-content"></div>
+  </div>
+  <div id="container"></div>
 
-  <section id="home">
-    <div id="particles-js"></div>
-    <div class="content">
-      <h1 class="fade-in" style="animation-delay:0.3s">Welcome to <span class="typewriter">Nitesh</span></h1>
-      <div class="morph"></div>
-      <p class="slide-in" style="animation-delay:0.8s">Explore my animated world! Scroll to see diverse animations in every section.</p>
-      <div>
-        <a href="#aboutme" class="icon bounce"><i class="fas fa-angle-down"></i></a>
-      </div>
-    </div>
-  </section>
+  <!-- Main Page Section -->
+  <div class="page" id="main-page">
+    <div style="height:100vh;"></div>
+  </div>
 
-  <section id="aboutme">
-    <h2 class="fade-in" style="animation-delay:0.2s">About Me</h2>
-    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Pic" class="profile-img fade-in" style="animation-delay:0.6s">
-    <p class="slide-in" style="animation-delay:1s">
-      Hi! I'm Nitesh8757.<br>
-      I love creating beautiful, interactive web experiences. <span class="spin">🌐</span>
-      <br>My interests: <span class="bounce">Web Development, Animation, UI/UX</span>
-    </p>
-  </section>
+  <div class="section-sep"></div>
 
-  <section id="aboutus">
-    <h2 class="fade-in" style="animation-delay:0.2s">About Us</h2>
-    <div class="slide-in" style="animation-delay:0.5s">
+  <!-- About Us Section -->
+  <div class="page" id="aboutus-page">
+    <div id="aboutus-content" tabindex="0" title="Click or hover for more!">
+      <img class="about-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Eo_circle_blue-white_checkmark.svg/1024px-Eo_circle_blue-white_checkmark.svg.png" alt="Galactic Logo"/>
+      <h2>About Us</h2>
       <p>
-        Our team is passionate about innovation and creativity. We design digital products with <span class="spin">💡</span> and <span class="bounce">🚀</span>.<br>
-        <b>Our mission:</b> To deliver dynamic and animated web solutions for everyone!
+        Welcome to the most powerful website in the galaxy!<br>
+        <b>Created by Nitesh Kumar</b> and the Galactic Hackers, we blend infinite HTML, cyber animations, and hacking spirit.<br>
+        Our mission: cosmic innovation, web mastery, and fun.<br>
+        <span style="color:#00fff7;font-weight:bold;">Explore. Hack. Dominate.</span>
       </p>
     </div>
-  </section>
+  </div>
 
-  <section id="profile">
-    <h2 class="fade-in" style="animation-delay:0.2s">Profile</h2>
-    <div class="slide-in" style="animation-delay:0.4s">
-      <ul>
-        <li class="fade-in" style="animation-delay:0.7s"><b>Name:</b> Nitesh Kumar</li>
-        <li class="fade-in" style="animation-delay:0.8s"><b>Role:</b> Web Developer</li>
-        <li class="fade-in" style="animation-delay:0.9s"><b>Skills:</b> HTML, CSS, JavaScript, Animations</li>
-        <li class="fade-in" style="animation-delay:1s"><b>Location:</b> India</li>
-      </ul>
-    </div>
-  </section>
+  <div class="section-sep"></div>
 
-  <section id="certificate">
-    <h2 class="fade-in" style="animation-delay:0.2s">Certificates</h2>
-    <div class="certificate-cards">
-      <div class="card fade-in" style="animation-delay:0.5s">
-        <i class="fas fa-certificate icon spin"></i>
-        <h3>Front-End Web Dev</h3>
-        <p>Issued by: FreeCodeCamp</p>
-        <p>Year: 2024</p>
+  <!-- Certificate Section -->
+  <div class="page" id="certificate-page">
+    <div id="certificate-content" tabindex="0" title="Click or hover for certificate animation!">
+      <img class="cert-logo" src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Certificate Logo"/>
+      <h2>Hacking Certificate</h2>
+      <div class="certificate-box">
+        <div class="certificate-title">Certificate of Elite Hacking</div>
+        <div class="certificate-name">Nitesh Kumar</div>
+        <div class="certificate-details">
+          has successfully completed the<br>
+          <b>Galactic Hacker Advanced Program</b><br>
+          with cosmic distinction and mastery of<br>
+          <span style="color:#00fff7;">Infinite HTML Animation</span>,<br>
+          Matrix Rain Effects, Quantum Cyber-Terminals,<br>
+          and more.
+        </div>
+        <div class="certificate-issue">
+          Issued: 2025-06-29 &mdash; Certificate ID: <b>GHACK-8757</b>
+        </div>
+        <div class="certificate-id">Signature: <b style="color:#fff;">Galactic Hackers</b></div>
       </div>
-      <div class="card fade-in" style="animation-delay:0.7s">
-        <i class="fas fa-award icon bounce"></i>
-        <h3>JavaScript Mastery</h3>
-        <p>Issued by: Codecademy</p>
-        <p>Year: 2023</p>
-      </div>
-      <div class="card fade-in" style="animation-delay:0.9s">
-        <i class="fas fa-medal icon"></i>
-        <h3>UI/UX Design</h3>
-        <p>Issued by: Coursera</p>
-        <p>Year: 2022</p>
+      <p>
+        <span style="color:#00fff7;">Show this certificate to any intergalactic recruiter!</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="section-sep"></div>
+
+  <!-- Games Section (100 games) -->
+  <div class="page" id="games-page">
+    <div id="games-content" tabindex="0" title="Click or hover for more!">
+      <h2>Hacker Mini-Games (100)</h2>
+      <div class="game-box" id="game-box">
+        <!-- Games will be injected by JS -->
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="contact">
-    <h2 class="fade-in" style="animation-delay:0.2s">Contact Us</h2>
-    <form class="contact-form fade-in" style="animation-delay:0.5s" autocomplete="off">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" required rows="4"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div style="margin-top:30px;">
-      <a href="mailto:nitesh8757@example.com" class="icon"><i class="fas fa-envelope"></i></a>
-      <a href="#" class="icon"><i class="fab fa-github"></i></a>
-      <a href="#" class="icon"><i class="fab fa-linkedin"></i></a>
+  <div class="section-sep"></div>
+
+  <!-- Pattern Lock Section -->
+  <div class="page" id="pattern-page">
+    <div id="pattern-content" tabindex="0" title="Draw the pattern to unlock the website!">
+      <h2>Pattern Unlock</h2>
+      <div class="pattern-instruction">Draw the correct pattern to unlock a secret link!</div>
+      <div class="pattern-lock">
+        <div class="pattern-grid" id="patternGrid">
+          <!-- JS grid -->
+        </div>
+      </div>
+      <div class="pattern-status" id="patternStatus"></div>
+      <div id="secretLink" style="margin-top:18px;display:none;">
+        <a href="https://github.com/Nitesh8757" target="_blank" style="color:#fff;background:#00ffea;padding:8px 18px;border-radius:9px;font-size:1.2em;text-decoration:none;box-shadow:0 0 12px #00ffea;">🚀 Secret Galaxy Portal</a>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Particles.js for animated background -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <div id="contact">
+    <span>Contact the Galactic Hackers:</span>
+    <a href="mailto:hackers@galaxy.com">Email</a>
+    <a href="https://t.me/galactic_hackers" target="_blank">Telegram</a>
+    <a href="https://twitter.com/galactic_hackers" target="_blank">Twitter/X</a>
+    &nbsp;|&nbsp; 
+    <span>&copy; 2025 The Most Powerful Website in the Galaxy</span>
+  </div>
   <script>
-    // Particle background effect
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 60 },
-        "color": { "value": "#ffcf00" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.4 },
-        "size": { "value": 4 },
-        "line_linked": { "enable": true, "distance": 150, "color": "#f68d2e", "opacity": 0.22, "width": 2 },
-        "move": { "enable": true, "speed": 2 }
+    // --- Matrix rain animation ---
+    const canvas = document.getElementById('matrix-rain');
+    const ctx = canvas.getContext('2d');
+    function resizeMatrix() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeMatrix();
+    window.addEventListener('resize', resizeMatrix);
+
+    const matrixChars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$%#@&*';
+    const fontSize = 20;
+    let columns = Math.floor(window.innerWidth / fontSize);
+    let drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0,10,18,0.20)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = fontSize + "px Fira Mono, monospace";
+      for(let i=0; i<drops.length; i++){
+        let text = matrixChars[Math.floor(Math.random()*matrixChars.length)];
+        ctx.fillStyle = "#00ffe4";
+        ctx.shadowColor = "#00ffea";
+        ctx.shadowBlur = 14;
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        ctx.shadowBlur = 0;
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.972)
+          drops[i]=0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 50);
+
+    // --- Auto-writing hacker terminal animation ---
+    const terminalLines = [
+      "[*] Initializing Galactic Uplink...",
+      "[*] Scanning cosmic ports: 1337, 31337, 8080, 666...",
+      "[*] Bypassing nebula firewalls [OK]",
+      "[*] Injecting quantum payload....",
+      "[*] Establishing wormhole connection...",
+      "[*] Hacking the Multiverse Mainframe...",
+      "[*] Downloading Starfleet credentials...",
+      "[*] Uploading rainbow worms to blackhole servers...",
+      "[*] Access GRANTED: Welcome, Galactic Hacker!",
+      "Nitesh kumar",
+      "root@galaxy:/# _"
+    ];
+    let terminalPos = 0;
+    let charPos = 0;
+    const terminal = document.getElementById('terminal-content');
+    let currentLine = '';
+    function writeTerminalLine() {
+      if (terminalPos >= terminalLines.length) {
+        setTimeout(() => {
+          terminal.innerHTML = '';
+          terminalPos = 0;
+          charPos = 0;
+          currentLine = '';
+          setTimeout(writeTerminalLine, 800);
+        }, 3400);
+        return;
+      }
+      let line = terminalLines[terminalPos];
+      if (charPos < line.length) {
+        currentLine += line[charPos];
+        terminal.innerHTML = terminal.innerHTML.replace(/_$/, '') + line[charPos] + '_';
+        charPos++;
+        setTimeout(writeTerminalLine, Math.random()*35+18);
+      } else {
+        terminal.innerHTML = terminal.innerHTML.replace(/_$/, '') + '<br/>';
+        terminal.scrollTop = terminal.scrollHeight;
+        currentLine = '';
+        charPos = 0;
+        terminalPos++;
+        setTimeout(writeTerminalLine, Math.random()*450+600);
+      }
+    }
+    setTimeout(writeTerminalLine, 700);
+
+    // --- Infinite flying elements (hacker style) ---
+    const highLevelHTML = [
+      () => {
+        const btn = document.createElement('button');
+        btn.className = 'button';
+        btn.textContent = ['BREACH','RUN','UPLOAD','OVERRIDE','💾 SAVE','🔓 UNLOCK'][Math.floor(Math.random()*6)];
+        btn.onclick = () => btn.textContent = '✔️';
+        return btn;
       },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "repulse" } }
+      () => {
+        const input = document.createElement('input');
+        input.className = 'input';
+        input.placeholder = ['root@galaxy:~$','Enter passphrase','Search...','0xDEADBEEF'][Math.floor(Math.random()*4)];
+        return input;
+      },
+      () => {
+        const textarea = document.createElement('textarea');
+        textarea.className = 'textarea';
+        textarea.rows = 2;
+        textarea.cols = 18;
+        textarea.placeholder = 'Type your exploit...';
+        return textarea;
+      },
+      () => {
+        const img = document.createElement('img');
+        img.className = 'img';
+        img.src = `https://robohash.org/${Math.random().toString(36).slice(2,8)}?set=set3&bgset=bg2&size=90x70`;
+        img.width = 90;
+        img.height = 70;
+        img.alt = "Robo Hacker";
+        return img;
+      },
+      () => {
+        const h = document.createElement(`h${Math.floor(Math.random()*4)+1}`);
+        h.textContent = [
+          'ACCESS GRANTED',
+          'HACKING...',
+          'GALACTIC SHELL',
+          'QUANTUM BREACH',
+          '💀 SYSTEM ROOT'
+        ][Math.floor(Math.random()*5)];
+        h.style.color = `hsl(${Math.floor(Math.random()*360)},85%,70%)`;
+        h.style.textShadow = '0 0 18px #0ff6';
+        return h;
+      },
+      () => {
+        const p = document.createElement('p');
+        p.textContent = [
+          'Data block: '+Math.random().toString(36).slice(2,12),
+          '0x'+(~~(Math.random()*1e16)).toString(16).toUpperCase(),
+          '🌌 Quantum flux detected',
+          ':: Running script.sh ::',
+          '>>> SYSTEM BREACHED <<<'
+        ][Math.floor(Math.random()*5)];
+        p.style.background = 'rgba(0,255,234,0.09)';
+        p.style.padding = '6px 18px';
+        p.style.borderRadius = '6px';
+        p.style.fontWeight = 'bold';
+        return p;
+      },
+      () => {
+        const ul = document.createElement('ul');
+        for(let i=0; i<3; i++) {
+          const li = document.createElement('li');
+          li.textContent = [
+            'Exploit '+(Math.floor(Math.random()*10000)),
+            '0x'+(~~(Math.random()*1e12)).toString(16).toUpperCase(),
+            'Port '+(Math.floor(Math.random()*65000))
+          ][Math.floor(Math.random()*3)];
+          ul.appendChild(li);
+        }
+        ul.style.background = '#00ffea15';
+        ul.style.borderRadius = '8px';
+        ul.style.padding = '7px 18px';
+        ul.style.color = '#0ff';
+        return ul;
+      },
+      () => {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.classList.add('svg');
+        svg.setAttribute('width', 60);
+        svg.setAttribute('height', 60);
+        svg.innerHTML = `<circle cx="30" cy="30" r="24" fill="#0ff" opacity="0.23"/><rect x="14" y="14" width="32" height="8" fill="#0ff"/><rect x="14" y="38" width="32" height="8" fill="#0ff"/>`;
+        return svg;
+      },
+      () => {
+        const progress = document.createElement('progress');
+        progress.className = 'progress';
+        progress.max = 100;
+        progress.value = Math.floor(Math.random()*100);
+        return progress;
+      },
+      () => {
+        const audio = document.createElement('audio');
+        audio.className = 'audio';
+        audio.controls = true;
+        audio.src = 'https://www.w3schools.com/html/horse.mp3';
+        return audio;
+      },
+      () => {
+        const video = document.createElement('video');
+        video.className = 'video';
+        video.controls = true;
+        video.width = 130;
+        video.height = 30;
+        video.src = 'https://www.w3schools.com/html/movie.mp4';
+        return video;
+      },
+      () => {
+        const select = document.createElement('select');
+        select.className = 'select';
+        for(let i=0; i<3; i++) {
+          const option = document.createElement('option');
+          option.value = i;
+          option.textContent = ['Shell','Root','Quantum'][i];
+          select.appendChild(option);
+        }
+        return select;
+      },
+      () => {
+        const code = document.createElement('pre');
+        code.className = 'code';
+        code.textContent = [
+          "sudo rm -rf / --no-preserve-root",
+          "ssh root@milkyway --port 31337",
+          "for (;;) { hack(); }"
+        ][Math.floor(Math.random()*3)];
+        return code;
+      },
+      () => {
+        const blockq = document.createElement('blockquote');
+        blockq.textContent = [
+          '“The only secure system is unplugged.”',
+          '“Glitch in the galaxy.”',
+          '“Root is not enough.”'
+        ][Math.floor(Math.random()*3)];
+        blockq.style.fontStyle = 'italic';
+        blockq.style.background = 'rgba(0,255,234,0.08)';
+        blockq.style.padding = '10px 14px';
+        blockq.style.borderLeft = '4px solid #0ff';
+        return blockq;
+      },
+      () => {
+        const meter = document.createElement('meter');
+        meter.className = 'meter';
+        meter.min = 0; meter.max = 10;
+        meter.value = Math.floor(Math.random()*10);
+        meter.style.width = '90px';
+        return meter;
+      },
+      () => {
+        const time = document.createElement('time');
+        time.dateTime = new Date().toISOString();
+        time.textContent = new Date().toLocaleTimeString();
+        time.style.fontWeight = 'bold';
+        return time;
+      },
+      () => {
+        const iframe = document.createElement('iframe');
+        iframe.className = 'iframe';
+        iframe.width = 112;
+        iframe.height = 70;
+        iframe.src = 'https://cybermap.kaspersky.com/en/widget/dynamic/dark';
+        iframe.title = "Cyber Map";
+        iframe.loading = "lazy";
+        return iframe;
+      },
+      () => {
+        const table = document.createElement('table');
+        table.className = "table";
+        for(let r=0;r<2;r++) {
+          const tr = document.createElement('tr');
+          for(let c=0;c<2;c++) {
+            const td = document.createElement('td');
+            td.textContent = ['👾','💾','🛰️','🔒','🛸','💻','🦠','🕶️'][Math.floor(Math.random()*8)];
+            td.style.padding='8px 16px';
+            td.style.fontSize='1.3em';
+            tr.appendChild(td);
+          }
+          table.appendChild(tr);
+        }
+        return table;
+      },
+      () => {
+        const canvas = document.createElement('canvas');
+        canvas.className = 'canvas';
+        canvas.width = 60;
+        canvas.height = 40;
+        const ctx2 = canvas.getContext('2d');
+        ctx2.fillStyle = "#0ff";
+        ctx2.globalAlpha = 0.33;
+        ctx2.beginPath();
+        ctx2.arc(30,20,17,0,Math.PI*2); ctx2.fill();
+        ctx2.globalAlpha = 1;
+        ctx2.strokeStyle = "#0ff";
+        ctx2.lineWidth = 2.5;
+        ctx2.beginPath();
+        ctx2.moveTo(10,32); ctx2.lineTo(50,32); ctx2.stroke();
+        return canvas;
+      },
+      () => {
+        const math = document.createElementNS('http://www.w3.org/1998/Math/MathML','math');
+        math.innerHTML='<msup><mi>h</mi><mn>4</mn></msup><mo>+</mo><msup><mi>a</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup>';
+        math.style.fontSize = '1.3em';
+        math.style.background = '#0ff4';
+        math.style.borderRadius = '7px';
+        return math;
+      }
+    ];
+    const anims = [
+      { name: 'fly1', duration: () => (Math.random()*7+7)+'s', delay: () => (Math.random()*4)+'s' },
+      { name: 'fly2', duration: () => (Math.random()*9+5)+'s', delay: () => (Math.random()*4)+'s' },
+      { name: 'fly3', duration: () => (Math.random()*8+6)+'s', delay: () => (Math.random()*4)+'s' },
+      { name: 'fly4', duration: () => (Math.random()*10+4)+'s', delay: () => (Math.random()*4)+'s' }
+    ];
+    function addFlyingElement() {
+      const el = highLevelHTML[Math.floor(Math.random()*highLevelHTML.length)]();
+      el.classList.add('flying');
+      const left = Math.random() * 94;
+      const size = Math.random()*0.8 + 0.67;
+      el.style.left = `${left}%`;
+      el.style.top = '100vh';
+      el.style.transform = `scale(${size})`;
+      el.style.zIndex = Math.floor(Math.random()*5)+1;
+      const anim = anims[Math.floor(Math.random()*anims.length)];
+      el.style.animationName = anim.name + ', fadeInOut';
+      el.style.animationDuration = anim.duration() + `, ${Math.random()*10+8}s`;
+      el.style.animationDelay = anim.delay() + ',0s';
+      el.style.animationFillMode = 'forwards';
+      el.addEventListener('mouseover', () => {
+        for(let i=0; i<3; i++) addFlyingElement();
+      });
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('#aboutus-page') || e.target.closest('#aboutus-content')) {
+          for(let i=0; i<8; i++) addFlyingElement();
+        } else {
+          for(let i=0; i<5; i++) addFlyingElement();
+        }
+      });
+      el.addEventListener('animationend', () => el.remove());
+      document.getElementById('container').appendChild(el);
+    }
+    setInterval(() => {
+      for(let i=0; i<Math.floor(Math.random()*3)+3; i++) addFlyingElement();
+    }, 700);
+    document.getElementById('container').addEventListener('click', e => {
+      for(let i=0; i<14; i++) addFlyingElement();
+    });
+    for(let i=0;i<22;i++) addFlyingElement();
+
+    // About Us, Certificate, Games, Pattern infinite burst on click/hover
+    ['aboutus-content','certificate-content','games-content','pattern-content'].forEach(id=>{
+      let el = document.getElementById(id);
+      el.addEventListener('mouseenter', () => {
+        for(let i=0; i<6; i++) addFlyingElement();
+      });
+      el.addEventListener('click', () => {
+        for(let i=0; i<12; i++) addFlyingElement();
+      });
+    });
+
+    // --- Mini-games logic ---
+    // 1. Click the Code game
+    let clickGameActive = false, clickGameScore = 0, clickGameTimeout;
+    function startClickGame(btn) {
+      if (clickGameActive) return;
+      clickGameActive = true;
+      clickGameScore = 0;
+      document.getElementById('click-code-score').innerHTML = `<b>Score: 0</b>`;
+      btn.disabled = true;
+      const handler = () => {
+        if (!clickGameActive) return;
+        clickGameScore++;
+        document.getElementById('click-code-score').innerHTML = `<b>Score: ${clickGameScore}</b>`;
+      };
+      document.getElementById('click-code-score').onclick = handler;
+      clickGameTimeout = setTimeout(() => {
+        clickGameActive = false;
+        btn.disabled = false;
+        document.getElementById('click-code-score').innerHTML = `<b>Final Score: ${clickGameScore}</b>`;
+        document.getElementById('click-code-score').onclick = null;
+      }, 10000);
+    }
+    // 2. Matrix Typing Game
+    let typingGameActive = false, typingWord = '', typingScore = 0, typingTimeout;
+    function startTypingGame(btn) {
+      if (typingGameActive) return;
+      typingGameActive = true; typingScore = 0;
+      let area = document.getElementById('matrix-typing-area');
+      btn.disabled = true;
+      function showWord() {
+        if (!typingGameActive) return;
+        typingWord = Math.random().toString(36).slice(2,7+Math.floor(Math.random()*3));
+        area.innerHTML = `<b style="font-size:1.25em">${typingWord}</b><br><input id="typetxt" autocomplete="off" style="font-size:1.1em;margin-top:6px;" autofocus>`;
+        let inp = document.getElementById('typetxt');
+        inp.focus();
+        inp.oninput = function() {
+          if (inp.value.trim() === typingWord) {
+            typingScore++;
+            showWord();
+          }
+        };
+      }
+      showWord();
+      typingTimeout = setTimeout(() => {
+        typingGameActive = false;
+        btn.disabled = false;
+        area.innerHTML = `<b>Final Score: ${typingScore}</b>`;
+      }, 13000);
+    }
+    // 3. Guess the Port Game
+    let portGameActive = false, portNumber = 0, portGuesses = 0;
+    function startPortGame(btn) {
+      if (portGameActive) return;
+      portGameActive = true; portGuesses = 0;
+      portNumber = Math.floor(Math.random()*64512)+1024;
+      let area = document.getElementById('guess-port-area');
+      btn.disabled = true;
+      area.innerHTML = `<input id="portguess" placeholder="Port?" style="font-size:1.1em;width:80px;"> <button id="portgobtn">Go</button><br><span id="porthint" style="font-size:0.98em;"></span>`;
+      document.getElementById('portgobtn').onclick = function() {
+        let guess = parseInt(document.getElementById('portguess').value,10);
+        portGuesses++;
+        if (guess === portNumber) {
+          area.innerHTML = `<b>You hacked the port in ${portGuesses} tries!</b>`;
+          btn.disabled = false;
+          portGameActive = false;
+        } else if (guess < portNumber) {
+          document.getElementById('porthint').textContent = 'Higher!';
+        } else if (guess > portNumber) {
+          document.getElementById('porthint').textContent = 'Lower!';
+        }
+      };
+    }
+
+    // --- 100 Games creation ---
+    function createGameDiv(idx) {
+      // Use 5 mini-games, rotate with different labels
+      let html = '';
+      switch(idx % 5) {
+        case 0: html = `<div class="mini-game"><h3>Click the Code #${idx+1}</h3>
+          <p>Click as fast as possible!</p>
+          <button onclick="alert('Clicked! Try the games at top for real action.')">Start</button>
+        </div>`; break;
+        case 1: html = `<div class="mini-game"><h3>Matrix Typing #${idx+1}</h3>
+          <p>Type random code fast!</p>
+          <button onclick="alert('Typed! Try the games at top for real action.')">Start</button>
+        </div>`; break;
+        case 2: html = `<div class="mini-game"><h3>Guess The Port #${idx+1}</h3>
+          <p>Guess a port (1024-65535)</p>
+          <button onclick="alert('Guessed! Try the games at top for real action.')">Start</button>
+        </div>`; break;
+        case 3: html = `<div class="mini-game"><h3>Cyber Memory #${idx+1}</h3>
+          <p>Remember the code pattern!</p>
+          <button onclick="alert('Memory! Try the games at top for real action.')">Start</button>
+        </div>`; break;
+        case 4: html = `<div class="mini-game"><h3>Random Hacker Game #${idx+1}</h3>
+          <p>Hack the node!</p>
+          <button onclick="alert('Hacked! Try the games at top for real action.')">Start</button>
+        </div>`; break;
+      }
+      return html;
+    }
+    let gameBox = document.getElementById('game-box');
+    // 3 real games at top, then 97 fake mini-games
+    for(let i=3; i<100; i++) {
+      gameBox.innerHTML += createGameDiv(i);
+    }
+
+    // --- Pattern Lock ---
+    // Pattern code: 1-2-5-8 (top-left, top-center, center, bottom-center)
+    const correctPattern = [0,1,4,7]; // 0-based index
+    let pattern = [];
+    const grid = document.getElementById('patternGrid');
+    function renderPatternGrid() {
+      grid.innerHTML = '';
+      for(let i=0;i<9;i++) {
+        let dot = document.createElement('div');
+        dot.className = 'pattern-dot';
+        dot.dataset.idx = i;
+        dot.tabIndex = 0;
+        dot.onmousedown = dot.ontouchstart = e => {
+          if (!pattern.includes(i)) {
+            dot.classList.add('selected');
+            pattern.push(i);
+          }
+        };
+        dot.onmouseover = e => {
+          if (e.buttons || e.type==='touchmove') {
+            if (!pattern.includes(i)) {
+              dot.classList.add('selected');
+              pattern.push(i);
+            }
+          }
+        };
+        grid.appendChild(dot);
+      }
+    }
+    renderPatternGrid();
+
+    let drawing = false;
+    grid.onmousedown = e => { drawing = true; pattern = []; renderPatternGrid(); }
+    grid.onmouseup = e => { drawing = false; checkPattern(); }
+    grid.onmouseleave = e => { if (drawing) { drawing = false; checkPattern(); } }
+    grid.ontouchstart = e => { drawing = true; pattern = []; renderPatternGrid(); }
+    grid.ontouchend = e => { drawing = false; checkPattern(); }
+
+    grid.addEventListener('mousemove', e => {
+      if (!drawing) return;
+      let rect = grid.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      let col = Math.floor(x / 74);
+      let row = Math.floor(y / 74);
+      let idx = row*3 + col;
+      if(idx>=0 && idx<9 && !pattern.includes(idx)) {
+        let dot = grid.children[idx];
+        dot.classList.add('selected');
+        pattern.push(idx);
+      }
+    });
+    grid.addEventListener('touchmove', e => {
+      if (!drawing) return;
+      let rect = grid.getBoundingClientRect();
+      let t = e.touches[0];
+      let x = t.clientX - rect.left;
+      let y = t.clientY - rect.top;
+      let col = Math.floor(x / 74);
+      let row = Math.floor(y / 74);
+      let idx = row*3 + col;
+      if(idx>=0 && idx<9 && !pattern.includes(idx)) {
+        let dot = grid.children[idx];
+        dot.classList.add('selected');
+        pattern.push(idx);
       }
     });
 
-    // Animate sections on scroll
-    const faders = document.querySelectorAll('.fade-in,.slide-in');
-    const appearOptions = { threshold: 0.15 };
-    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll){
-      entries.forEach(entry => {
-        if(!entry.isIntersecting) return;
-        entry.target.style.animationPlayState = 'running';
-        entry.target.classList.add('animated');
-        appearOnScroll.unobserve(entry.target);
-      });
-    }, appearOptions);
-    faders.forEach(fader => { fader.style.animationPlayState = 'paused'; appearOnScroll.observe(fader); });
-
-    // Simple typewriter reset for repeat effect
-    setInterval(() => {
-      document.querySelectorAll('.typewriter').forEach(el=>{
-        el.style.animation = 'none';
-        void el.offsetWidth; // reflow
-        el.style.animation = '';
-      });
-    }, 4000);
-
-    // Contact form fake submit
-    document.querySelector('.contact-form').onsubmit = e => {
-      e.preventDefault();
-      alert("Thank you for your message! (Form not actually submitted in this demo)");
-    };
+    function checkPattern() {
+      let status = document.getElementById('patternStatus');
+      if (pattern.length === 0) { status.textContent = ''; return; }
+      if (pattern.length !== correctPattern.length) {
+        status.textContent = "❌ Incorrect pattern length!";
+        setTimeout(() => { status.textContent=''; renderPatternGrid(); }, 800);
+        return;
+      }
+      for(let i=0;i<correctPattern.length;i++) {
+        if(pattern[i]!==correctPattern[i]) {
+          status.textContent = "❌ Wrong pattern!";
+          setTimeout(() => { status.textContent=''; renderPatternGrid(); }, 800);
+          return;
+        }
+      }
+      status.textContent = "✅ Pattern correct! Portal unlocked!";
+      document.getElementById('secretLink').style.display = 'block';
+      setTimeout(() => { status.textContent=''; }, 2000);
+      renderPatternGrid();
+    }
   </script>
 </body>
 </html>
