@@ -3,7 +3,257 @@
 <head>
     
     <!-- ... (existing content, put this in your About Me, Profile Card, or wherever you want the hacker blinking animation) ... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ultimate Universe Hacking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+    body {
+      margin: 0;
+      padding: 0;
+      background: #161925;
+      min-height: 100vh;
+      font-family: "Share Tech Mono", monospace;
+      color: #39ff14;
+      overflow-x: hidden;
+    }
+    .hacking-bg {
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .main-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 120px;
+    }
+    .lock-profile {
+      background: rgba(10, 15, 30, 0.88);
+      border: 2px solid #39ff14;
+      box-shadow: 0 0 20px #39ff14aa, 0 0 10px #1a1a1a;
+      border-radius: 16px;
+      padding: 36px 28px 24px;
+      max-width: 380px;
+      width: 95%;
+      margin: 50px auto 20px;
+      text-align: center;
+    }
+    .lock-icon {
+      font-size: 54px;
+      color: #39ff14;
+      margin-bottom: 10px;
+    }
+    .lock-profile h2 {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      color: #fff;
+      text-shadow: 0 0 6px #39ff14;
+    }
+    .lock-profile input, .lock-profile button {
+      font-family: inherit;
+      display: block;
+      width: 100%;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #39ff14;
+      background: #181a23;
+      color: #39ff14;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: 0 0 4px #39ff1455;
+      transition: border 0.3s;
+    }
+    .lock-profile input:focus {
+      border: 2px solid #39ff14;
+    }
+    .lock-profile button {
+      background: linear-gradient(90deg, #39ff14 20%, #00e2ff 100%);
+      color: #161925;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 6px #39ff1488;
+      transition: background 0.2s;
+    }
+    .lock-profile button:hover {
+      background: linear-gradient(90deg, #00e2ff 20%, #39ff14 100%);
+    }
+    .profile-message {
+      color: #39ff14;
+      font-size: 1.1rem;
+      text-shadow: 0 0 4px #39ff14;
+      margin-top: 8px;
+    }
+    .section-divider {
+      width: 80%;
+      margin: 50px auto 28px;
+      border: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #39ff14 60%, transparent);
+      box-shadow: 0 0 12px #39ff1444;
+    }
+    .contact-us {
+      background: rgba(10, 15, 30, 0.88);
+      border: 2px solid #00e2ff;
+      box-shadow: 0 0 20px #00e2ffaa;
+      border-radius: 14px;
+      padding: 28px 22px 18px;
+      max-width: 350px;
+      width: 90%;
+      margin: 0 auto 30px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .contact-us h3 {
+      color: #00e2ff;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00e2ff;
+    }
+    .contact-us p {
+      color: #fff;
+      margin: 0 0 12px;
+      font-size: 1rem;
+      text-shadow: 0 0 3px #00e2ff66;
+    }
+    .contact-us a {
+      color: #39ff14;
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .contact-us a:hover {
+      color: #00e2ff;
+    }
+    @media (max-width: 450px) {
+      .lock-profile, .contact-us {
+        padding: 12px 4vw;
+        font-size: 1rem;
+      }
+      .main-content {
+        padding-bottom: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="hacking-bg"></canvas>
+  <div class="main-content">
+    <form class="lock-profile" id="profileForm" autocomplete="off">
+      <div class="lock-icon">🔒</div>
+      <h2>Create Hacker Profile</h2>
+      <input type="text" id="username" placeholder="Username (codename)" required autocomplete="off">
+      <input type="password" id="password" placeholder="Password" required autocomplete="off">
+      <input type="email" id="email" placeholder="Email (for recovery)" required autocomplete="off">
+      <button type="submit">Create Profile</button>
+      <div class="profile-message" id="profileMessage"></div>
+    </form>
+    <hr class="section-divider">
+  </div>
+  <div class="contact-us">
+    <h3>Contact Us</h3>
+    <p>Encountered an anomaly? Need support?</p>
+    <p>
+      Email: <a href="mailto:hackmaster@ultiverse.com">hackmaster@ultiverse.com</a>
+      <br>
+      Discord: <a href="https://discord.gg/hackinguniverse" target="_blank">@HackingUniverse</a>
+    </p>
+  </div>
+  <script>
+    // INFINITE HACKING ANIMATIONS (Matrix Rain)
+    const canvas = document.querySelector('.hacking-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+    let fontSize = 18;
+    let columns = Math.floor(w / fontSize);
+    let drops = [];
+    let chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@*";
+    chars = chars.split("");
 
+    for (let x = 0; x < columns; x++) {
+      drops[x] = Math.random() * h / fontSize;
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(22,25,37,0.14)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = fontSize + "px 'Share Tech Mono', monospace";
+      for (let i = 0; i < drops.length; i++) {
+        let text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillStyle = i % 5 === 0 ? "#00e2ff" : "#39ff14";
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > h && Math.random() > 0.93) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+      // Add glitch effect
+      if (Math.random() > 0.92) {
+        ctx.save();
+        ctx.globalAlpha = 0.17;
+        ctx.fillStyle = "#00e2ff";
+        let y = Math.floor(Math.random() * h);
+        ctx.fillRect(0, y, w, fontSize * Math.random() * 3);
+        ctx.restore();
+      }
+      requestAnimationFrame(drawMatrix);
+    }
+    drawMatrix();
+
+    // Responsive
+    window.addEventListener('resize', () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      columns = Math.floor(w / fontSize);
+      drops = [];
+      for (let x = 0; x < columns; x++) {
+        drops[x] = Math.random() * h / fontSize;
+      }
+    });
+
+    // Lock Profile Form Handler
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('profileMessage');
+
+      if (!username || !password || !email) {
+        msg.textContent = "All fields are required!";
+        msg.style.color = "#ff2e2e";
+        return;
+      }
+      msg.style.color = "#39ff14";
+      msg.textContent = `Profile "${username}" created! Welcome to the Ultimate Universe.`;
+      setTimeout(()=>{msg.textContent = "";}, 4500);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
 <!-- Add this HTML wherever you want the hacker blinking animation to appear (e.g., inside your about/profile card): -->
 <div class="hacker-eyes-container" style="margin:0 auto;display:flex;justify-content:center;align-items:center;">
   <div class="hacker-face" style="position:relative;width:72px;height:72px;">
