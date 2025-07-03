@@ -1,466 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <!-- ... (existing content, put this in your About Me, Profile Card, or wherever you want the hacker blinking animation) ... -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ultimate Universe Hacking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
-    body {
-      margin: 0;
-      padding: 0;
-      background: #161925;
-      min-height: 100vh;
-      font-family: "Share Tech Mono", monospace;
-      color: #39ff14;
-      overflow-x: hidden;
-    }
-    .hacking-bg {
-      position: fixed;
-      left: 0; top: 0; width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-    .main-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-      padding-bottom: 120px;
-    }
-    .lock-profile {
-      background: rgba(10, 15, 30, 0.88);
-      border: 2px solid #39ff14;
-      box-shadow: 0 0 20px #39ff14aa, 0 0 10px #1a1a1a;
-      border-radius: 16px;
-      padding: 36px 28px 24px;
-      max-width: 380px;
-      width: 95%;
-      margin: 50px auto 20px;
-      text-align: center;
-    }
-    .lock-icon {
-      font-size: 54px;
-      color: #39ff14;
-      margin-bottom: 10px;
-    }
-    .lock-profile h2 {
-      font-size: 2rem;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-      color: #fff;
-      text-shadow: 0 0 6px #39ff14;
-    }
-    .lock-profile input, .lock-profile button {
-      font-family: inherit;
-      display: block;
-      width: 100%;
-      margin-bottom: 18px;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #39ff14;
-      background: #181a23;
-      color: #39ff14;
-      font-size: 1rem;
-      outline: none;
-      box-shadow: 0 0 4px #39ff1455;
-      transition: border 0.3s;
-    }
-    .lock-profile input:focus {
-      border: 2px solid #39ff14;
-    }
-    .lock-profile button {
-      background: linear-gradient(90deg, #39ff14 20%, #00e2ff 100%);
-      color: #161925;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 0 6px #39ff1488;
-      transition: background 0.2s;
-    }
-    .lock-profile button:hover {
-      background: linear-gradient(90deg, #00e2ff 20%, #39ff14 100%);
-    }
-    .profile-message {
-      color: #39ff14;
-      font-size: 1.1rem;
-      text-shadow: 0 0 4px #39ff14;
-      margin-top: 8px;
-    }
-    .section-divider {
-      width: 80%;
-      margin: 50px auto 28px;
-      border: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #39ff14 60%, transparent);
-      box-shadow: 0 0 12px #39ff1444;
-    }
-    .contact-us {
-      background: rgba(10, 15, 30, 0.88);
-      border: 2px solid #00e2ff;
-      box-shadow: 0 0 20px #00e2ffaa;
-      border-radius: 14px;
-      padding: 28px 22px 18px;
-      max-width: 350px;
-      width: 90%;
-      margin: 0 auto 30px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-    }
-    .contact-us h3 {
-      color: #00e2ff;
-      margin-bottom: 12px;
-      font-size: 1.3rem;
-      letter-spacing: 1px;
-      text-shadow: 0 0 5px #00e2ff;
-    }
-    .contact-us p {
-      color: #fff;
-      margin: 0 0 12px;
-      font-size: 1rem;
-      text-shadow: 0 0 3px #00e2ff66;
-    }
-    .contact-us a {
-      color: #39ff14;
-      text-decoration: underline;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-    .contact-us a:hover {
-      color: #00e2ff;
-    }
-    @media (max-width: 450px) {
-      .lock-profile, .contact-us {
-        padding: 12px 4vw;
-        font-size: 1rem;
-      }
-      .main-content {
-        padding-bottom: 170px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <canvas class="hacking-bg"></canvas>
-  <div class="main-content">
-    <form class="lock-profile" id="profileForm" autocomplete="off">
-      <div class="lock-icon">🔒</div>
-      <h2>Create Hacker Profile</h2>
-      <input type="text" id="username" placeholder="Username (codename)" required autocomplete="off">
-      <input type="password" id="password" placeholder="Password" required autocomplete="off">
-      <input type="email" id="email" placeholder="Email (for recovery)" required autocomplete="off">
-      <button type="submit">Create Profile</button>
-      <div class="profile-message" id="profileMessage"></div>
-    </form>
-    <hr class="section-divider">
-  </div>
-  <div class="contact-us">
-    <h3>Contact Us</h3>
-    <p>Encountered an anomaly? Need support?</p>
-    <p>
-      Email: <a href="mailto:hackmaster@ultiverse.com">hackmaster@ultiverse.com</a>
-      <br>
-      Discord: <a href="https://discord.gg/hackinguniverse" target="_blank">@HackingUniverse</a>
-    </p>
-  </div>
-  <script>
-    // INFINITE HACKING ANIMATIONS (Matrix Rain)
-    const canvas = document.querySelector('.hacking-bg');
-    const ctx = canvas.getContext('2d');
-    let w = window.innerWidth, h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-    let fontSize = 18;
-    let columns = Math.floor(w / fontSize);
-    let drops = [];
-    let chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@*";
-    chars = chars.split("");
-
-    for (let x = 0; x < columns; x++) {
-      drops[x] = Math.random() * h / fontSize;
-    }
-
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(22,25,37,0.14)";
-      ctx.fillRect(0, 0, w, h);
-      ctx.font = fontSize + "px 'Share Tech Mono', monospace";
-      for (let i = 0; i < drops.length; i++) {
-        let text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillStyle = i % 5 === 0 ? "#00e2ff" : "#39ff14";
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > h && Math.random() > 0.93) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-      // Add glitch effect
-      if (Math.random() > 0.92) {
-        ctx.save();
-        ctx.globalAlpha = 0.17;
-        ctx.fillStyle = "#00e2ff";
-        let y = Math.floor(Math.random() * h);
-        ctx.fillRect(0, y, w, fontSize * Math.random() * 3);
-        ctx.restore();
-      }
-      requestAnimationFrame(drawMatrix);
-    }
-    drawMatrix();
-
-    // Responsive
-    window.addEventListener('resize', () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-      columns = Math.floor(w / fontSize);
-      drops = [];
-      for (let x = 0; x < columns; x++) {
-        drops[x] = Math.random() * h / fontSize;
-      }
-    });
-
-    // Lock Profile Form Handler
-    document.getElementById('profileForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('profileMessage');
-
-      if (!username || !password || !email) {
-        msg.textContent = "All fields are required!";
-        msg.style.color = "#ff2e2e";
-        return;
-      }
-      msg.style.color = "#39ff14";
-      msg.textContent = `Profile "${username}" created! Welcome to the Ultimate Universe.`;
-      setTimeout(()=>{msg.textContent = "";}, 4500);
-      this.reset();
-    });
-  </script>
-</body>
-</html>
-<!-- Add this HTML wherever you want the hacker blinking animation to appear (e.g., inside your about/profile card): -->
-<div class="hacker-eyes-container" style="margin:0 auto;display:flex;justify-content:center;align-items:center;">
-  <div class="hacker-face" style="position:relative;width:72px;height:72px;">
-    <div class="hacker-eye hacker-eye-left"></div>
-    <div class="hacker-eye hacker-eye-right"></div>
-    <div class="hacker-mouth"></div>
-    <div class="hacker-hood"></div>
-  </div>
-</div>
-
-<!-- Add this CSS to your <style> section (or global CSS): -->
-<style>
-.hacker-eyes-container { margin: 0 auto 18px auto; }
-.hacker-face {
-  position: relative; width: 72px; height: 72px;
-  background: radial-gradient(ellipse at center, #0e283d 60%, #061727 100%);
-  border-radius: 50%;
-  box-shadow: 0 0 30px #00ffea33, 0 0 9px #00ffea;
-  overflow: visible;
-}
-.hacker-hood {
-  position: absolute; left: -8px; top: -14px;
-  width: 88px; height: 46px;
-  background: linear-gradient(120deg, #00ffe4 18%, #061727 100%);
-  border-radius: 50% 50% 40% 40%/80% 80% 36% 36%;
-  z-index: 1;
-  opacity: 0.11;
-}
-.hacker-eye {
-  position: absolute;
-  width: 18px; height: 18px;
-  background: #fff;
-  border-radius: 50%;
-  top: 28px;
-  box-shadow: 0 0 10px #00ffea, 0 0 4px #fff;
-  z-index: 2;
-  overflow: hidden;
-}
-.hacker-eye-left { left: 16px; }
-.hacker-eye-right { right: 16px; }
-.hacker-eye::after {
-  content: "";
-  display: block;
-  width: 10px; height: 10px;
-  background: #00ffe4;
-  border-radius: 50%;
-  position: absolute;
-  left: 4px; top: 4px;
-  animation: hacker-eye-blink 4s infinite, hacker-eye-move 5s infinite alternate;
-  box-shadow: 0 0 14px #00ffea99;
-}
-.hacker-eye-right::after {
-  animation-delay: 0.2s, 0s;
-}
-.hacker-eye-left::after {
-  animation-delay: 0s, 0.13s;
-}
-@keyframes hacker-eye-blink {
-  0%, 7%, 100% { height: 10px; }
-  8%, 10% { height: 2px; }
-  11%, 100% { height: 10px; }
-}
-@keyframes hacker-eye-move {
-  0% { left: 4px; top: 4px; }
-  25% { left: 2px; top: 5px; }
-  50% { left: 6px; top: 4px; }
-  70% { left: 4px; top: 7px; }
-  100% { left: 4px; top: 4px; }
-}
-.hacker-mouth {
-  position: absolute;
-  left: 25px; top: 51px;
-  width: 22px; height: 10px;
-  border-bottom: 3px solid #00ffe4;
-  border-radius: 0 0 18px 18px;
-  z-index: 3;
-  opacity: 0.65;
-  filter: blur(0.5px);
-}
-</style>
-    <!-- ... previous content ... -->
-<div class="page" id="numberlock-page" style="margin-top:100px;">
-  <div id="numberlock-content" ...>
-    <!-- ... -->
-  </div>
-</div>
-<!-- Number Lock Section (or Pattern Lock, wherever your secret portal/unlock is) -->
-<div class="page" id="numberlock-page">
-  <div id="numberlock-content" tabindex="0" title="Enter the correct code to unlock a special message!">
-    <h2>Number Lock</h2>
-    <div style="max-width:340px;margin:0 auto;">
-      <div class="pattern-instruction">Enter the secret 4-digit code and press Unlock!</div>
-      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:18px;">
-        <input id="numlock1" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
-        <input id="numlock2" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
-        <input id="numlock3" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
-        <input id="numlock4" maxlength="1" type="password" style="width:42px;font-size:2em;text-align:center;border:2px solid #00ffea;background:#0f1a21cc;color:#00ffea;border-radius:7px;" autocomplete="off">
-      </div>
-      <button onclick="checkNumberLock()" style="background:#00ffea;color:#001;font-weight:bold;padding:10px 32px;border-radius:8px;border:none;box-shadow:0 0 12px #00fff7;font-size:1.1em;cursor:pointer;">Unlock</button>
-      <div id="numberlock-status" class="pattern-status" style="margin-top:16px;"></div>
-      <div id="numberlock-secret" style="margin-top:18px;display:none;">
-        <!-- START: Animated Profile Card -->
-        <div id="animated-profile-card" style="max-width:410px;margin:0 auto 25px auto;padding:28px 20px 22px 20px;background:linear-gradient(120deg,#061727 80%,#00ffea33 100%);border-radius:18px;box-shadow:0 0 40px #00ffea66,0 0 8px #fff2;border:2.5px solid #00ffea;position:relative;overflow:hidden;animation:profile-pop 1.4s cubic-bezier(.55,1.7,.6,1.1) 1;">
-          <div style="position:absolute;top:-80px;left:-50px;width:200px;height:200px;z-index:0;pointer-events:none;opacity:0.13;">
-            <svg width="200" height="200">
-              <circle cx="100" cy="100" r="80" fill="#00ffe4" filter="url(#profile-glow)" />
-              <defs>
-                <filter id="profile-glow">
-                  <feGaussianBlur stdDeviation="18" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-            </svg>
-          </div>
-          <div style="z-index:2;position:relative;">
-            <img src="https://avatars.githubusercontent.com/u/13453738?v=4" alt="Nitesh Kumar" width="100" height="100" style="border-radius:50%;border:3px solid #00ffea;box-shadow:0 0 22px #00ffea99,0 0 12px #fff4;background:#061727;margin-bottom:12px;animation:profile-img-glow 2.1s infinite alternate;">
-            <h2 style="color:#fff;margin:0 0 6px 0;letter-spacing:2px;font-size:1.4em;text-shadow:0 0 10px #00ffea;">Nitesh Kumar</h2>
-            <p style="margin:0 0 7px 0;color:#00ffea;font-size:1.09em;font-weight:bold;letter-spacing:1.2px;">@Nitesh8757</p>
-            <div style="margin:0 0 10px 0;">
-              <a href="https://github.com/Nitesh8757" target="_blank" style="color:#fff;background:#00ffea;padding:6px 16px;border-radius:7px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #00ffea;transition:.18s;">GitHub</a>
-              <a href="https://twitter.com/Nitesh8757" target="_blank" style="color:#00ffea;background:#fff;padding:6px 16px;border-radius:7px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #00ffea;margin-left:7px;transition:.18s;">Twitter/X</a>
-            </div>
-            <div style="color:#dff;font-size:1.03em;line-height:1.45;max-width:330px;margin:0 auto;">
-              🚀 Web Dev, Cyber Enthusiast, Animation Geek.<br>
-              <span style="color:#00ffe4;">Galactic Hacker. Portal Creator. Infinite HTML Animator.</span>
-            </div>
-          </div>
-          <!-- Animated cyber rings SVG -->
-          <svg viewBox="0 0 240 120" width="230" height="110" style="position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);z-index:1;pointer-events:none;">
-            <ellipse cx="120" cy="60" rx="98" ry="43" fill="none" stroke="#00ffea" stroke-width="2.5" opacity="0.26"/>
-            <ellipse cx="120" cy="60" rx="70" ry="28" fill="none" stroke="#00fff7" stroke-width="2" opacity="0.14"/>
-            <ellipse cx="120" cy="60" rx="110" ry="53" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.09"/>
-            <circle cx="120" cy="60" r="5" fill="#00ffea" opacity="0.17">
-              <animate attributeName="r" values="5;27;5" dur="3.2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.17;0.01;0.17" dur="3.2s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
-          <!-- Flying cyber icon -->
-          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="47" style="position:absolute;top:5px;right:8px;animation:fly-spin 4.4s linear infinite;">
-        </div>
-        <style>
-          @keyframes profile-pop {
-            0% { transform: scale(0.7) rotate(-20deg);}
-            70% { transform: scale(1.08) rotate(5deg);}
-            100% { transform: scale(1) rotate(0deg);}
-          }
-          @keyframes profile-img-glow {
-            0% { box-shadow:0 0 22px #00ffea99,0 0 12px #fff4;}
-            100% { box-shadow:0 0 40px #00ffea,0 0 22px #fff;}
-          }
-          @keyframes fly-spin {
-            0% { transform: rotate(0deg) scale(1);}
-            90% { transform: rotate(340deg) scale(1.18);}
-            100% { transform: rotate(360deg) scale(1);}
-          }
-        </style>
-        <!-- END: Animated Profile Card -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ... (rest of your HTML, such as contact/footer, remains unchanged) ... -->
-
-<script>
-  // ... (your other scripts above remain unchanged) ...
-
-  // --- Number Lock logic ---
-  const numberLockCode = ['8','7','5','7']; // You can change this code if you wish
-  // Autofocus/auto tab
-  ['numlock1','numlock2','numlock3','numlock4'].forEach((id, idx, arr) => {
-    let el = document.getElementById(id);
-    el.addEventListener('input', function() {
-      if (this.value.length === 1 && idx < 3) {
-        arr[idx+1] && document.getElementById(arr[idx+1]).focus();
-      }
-    });
-    el.addEventListener('keydown', function(e){
-      if (e.key === 'Backspace' && this.value === '' && idx > 0) {
-        arr[idx-1] && document.getElementById(arr[idx-1]).focus();
-      }
-    });
-  });
-  function checkNumberLock() {
-    const val =
-      document.getElementById('numlock1').value +
-      document.getElementById('numlock2').value +
-      document.getElementById('numlock3').value +
-      document.getElementById('numlock4').value;
-    const status = document.getElementById('numberlock-status');
-    if (val === numberLockCode.join('')) {
-      status.textContent = "✅ Correct code! Number lock opened!";
-      document.getElementById('numberlock-secret').style.display = 'block';
-    } else {
-      status.textContent = "❌ Wrong code! Try again.";
-      document.getElementById('numberlock-secret').style.display = 'none';
-    }
-  }
-</script>
   <meta charset="UTF-8">
   <title>Galactic Hacker Animation Portal</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
-    
     html, body {
       height: 100%;
       margin: 0;
@@ -485,7 +29,7 @@
       z-index: 1;
       position: relative;
     }
-    #aboutus-page, #certificate-page, #games-page, #pattern-page {
+    #aboutus-page, #certificate-page, #games-page {
       z-index: 2;
       background: linear-gradient(135deg, #061727 80%, #03101e 100%);
       border-top: 3px solid #00ffea66;
@@ -502,8 +46,8 @@
       opacity: 0.15;
       box-shadow: 0 0 12px #00ffea66;
     }
-    #aboutus-content, #certificate-content, #games-content, #pattern-content {
-      max-width: 1140px;
+    #aboutus-content, #certificate-content, #games-content {
+      max-width: 700px;
       margin: 60px auto 40px auto;
       padding: 36px 24px 30px 24px;
       background: rgba(13,40,55,0.95);
@@ -511,21 +55,21 @@
       box-shadow: 0 0 40px #00ffea44;
       text-align: center;
     }
-    #aboutus-content h2, #certificate-content h2, #games-content h2, #pattern-content h2 {
+    #aboutus-content h2, #certificate-content h2, #games-content h2 {
       margin: 0 0 15px 0;
       color: #00fff7;
       letter-spacing: 2px;
       font-size: 2em;
       text-shadow: 0 0 12px #0ff7;
     }
-    #aboutus-content p, #certificate-content p, #games-content p, #pattern-content p {
+    #aboutus-content p, #certificate-content p, #games-content p {
       margin: 0 0 7px 0;
       color: #00ffea;
       opacity: 0.93;
       font-size: 1.15em;
       line-height: 1.7;
     }
-    #aboutus-content b, #certificate-content b, #games-content b, #pattern-content b {
+    #aboutus-content b, #certificate-content b, #games-content b {
       color: #fff;
       text-shadow: 0 0 8px #00fff7;
     }
@@ -593,7 +137,6 @@
       flex-flow: row wrap;
       justify-content: center;
       gap: 40px 30px;
-      max-width: 1200px;
     }
     .mini-game {
       background: #0f1a21cc;
@@ -610,7 +153,6 @@
       transition: transform 0.18s, box-shadow 0.18s;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
     }
     .mini-game:hover {
       box-shadow: 0 0 40px #00fff7cc;
@@ -623,55 +165,6 @@
       font-size: 1.1em;
       letter-spacing: 1.2px;
       text-shadow: 0 0 4px #00ffea;
-    }
-    /* Pattern lock styles */
-    .pattern-lock {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 32px auto 6px auto;
-    }
-    .pattern-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 56px);
-      grid-template-rows: repeat(3, 56px);
-      gap: 18px;
-      background: rgba(0,255,234,0.07);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 0 18px #00fff744;
-      user-select: none;
-      touch-action: none;
-    }
-    .pattern-dot {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      background: #05141d;
-      border: 2.7px solid #00fff7;
-      box-shadow: 0 0 12px #00ffea33;
-      margin: 0;
-      transition: background 0.18s, border 0.18s;
-      cursor: pointer;
-      position: relative;
-    }
-    .pattern-dot.active, .pattern-dot.selected {
-      background: #00ffea;
-      border-color: #fff;
-      box-shadow: 0 0 30px #00fff7cc;
-    }
-    .pattern-instruction {
-      color: #fff;
-      margin-bottom: 20px;
-      font-size: 1.18em;
-      opacity: 0.85;
-    }
-    .pattern-status {
-      color: #00fff7;
-      font-size: 1.1em;
-      margin-top: 9px;
-      min-height: 20px;
-      letter-spacing: 1.2px;
-      font-weight: bold;
     }
     /* Terminal, Matrix, Infinite Animations as before */
     #matrix-rain {
@@ -859,16 +352,14 @@
     }
     #aboutus-content,
     #certificate-content,
-    #games-content,
-    #pattern-content {
+    #games-content {
       transition: box-shadow 0.35s, border 0.3s;
       cursor: pointer;
       border: 2px solid transparent;
     }
     #aboutus-content:hover,
     #certificate-content:hover,
-    #games-content:hover,
-    #pattern-content:hover {
+    #games-content:hover {
       box-shadow: 0 0 90px #00fff7cc, 0 0 44px #fff3;
       border: 2px solid #00ffea;
       background: rgba(13,40,55,1);
@@ -882,6 +373,7 @@
       80%{ transform: scale(1.07) rotate(-2deg);}
       100%{ transform: scale(1) rotate(0deg);}
     }
+    /* Contact */
     #contact {
       position: fixed;
       bottom: 0; left: 0;
@@ -912,11 +404,6 @@
     #contact a:hover {
       background: #fff;
       color: #00ffea;
-    }
-    /* Responsive */
-    @media (max-width: 800px) {
-      .game-box { gap: 22px 10px; }
-      .mini-game { min-width: 98vw; }
     }
   </style>
 </head>
@@ -980,31 +467,32 @@
 
   <div class="section-sep"></div>
 
-  <!-- Games Section (100 games) -->
+  <!-- Games Section -->
   <div class="page" id="games-page">
     <div id="games-content" tabindex="0" title="Click or hover for more!">
-      <h2>Hacker Mini-Games (100)</h2>
-      <div class="game-box" id="game-box">
-        <!-- Games will be injected by JS -->
-      </div>
-    </div>
-  </div>
-
-  <div class="section-sep"></div>
-
-  <!-- Pattern Lock Section -->
-  <div class="page" id="pattern-page">
-    <div id="pattern-content" tabindex="0" title="Draw the pattern to unlock the website!">
-      <h2>Pattern Unlock</h2>
-      <div class="pattern-instruction">Draw the correct pattern to unlock a secret link!</div>
-      <div class="pattern-lock">
-        <div class="pattern-grid" id="patternGrid">
-          <!-- JS grid -->
+      <h2>Hacker Mini-Games</h2>
+      <div class="game-box">
+        <!-- Game: Click the Code -->
+        <div class="mini-game" id="click-code-game">
+          <h3>Click the Code</h3>
+          <p>How many hacks in 10 seconds?</p>
+          <button onclick="startClickGame(this)">Start</button>
+          <div id="click-code-score" style="margin-top:6px;font-size:1.08em;"></div>
         </div>
-      </div>
-      <div class="pattern-status" id="patternStatus"></div>
-      <div id="secretLink" style="margin-top:18px;display:none;">
-        <a href="https://github.com/Nitesh8757" target="_blank" style="color:#fff;background:#00ffea;padding:8px 18px;border-radius:9px;font-size:1.2em;text-decoration:none;box-shadow:0 0 12px #00ffea;">🚀 Secret Galaxy Portal</a>
+        <!-- Game: Matrix Typing -->
+        <div class="mini-game" id="matrix-typing-game">
+          <h3>Matrix Typing</h3>
+          <p>Type the falling code!</p>
+          <button onclick="startTypingGame(this)">Start</button>
+          <div id="matrix-typing-area" style="margin-top:6px;font-size:1.08em;"></div>
+        </div>
+        <!-- Game: Guess the Port -->
+        <div class="mini-game" id="guess-port-game">
+          <h3>Guess The Port</h3>
+          <p>Guess the open port (1024-65535)!</p>
+          <button onclick="startPortGame(this)">Start</button>
+          <div id="guess-port-area" style="margin-top:6px;font-size:1.08em;"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1347,8 +835,8 @@
     });
     for(let i=0;i<22;i++) addFlyingElement();
 
-    // About Us, Certificate, Games, Pattern infinite burst on click/hover
-    ['aboutus-content','certificate-content','games-content','pattern-content'].forEach(id=>{
+    // About Us, Certificate, Games infinite burst on click/hover
+    ['aboutus-content','certificate-content','games-content'].forEach(id=>{
       let el = document.getElementById(id);
       el.addEventListener('mouseenter', () => {
         for(let i=0; i<6; i++) addFlyingElement();
@@ -1429,129 +917,6 @@
           document.getElementById('porthint').textContent = 'Lower!';
         }
       };
-    }
-
-    // --- 100 Games creation ---
-    function createGameDiv(idx) {
-      // Use 5 mini-games, rotate with different labels
-      let html = '';
-      switch(idx % 5) {
-        case 0: html = `<div class="mini-game"><h3>Click the Code #${idx+1}</h3>
-          <p>Click as fast as possible!</p>
-          <button onclick="alert('Clicked! Try the games at top for real action.')">Start</button>
-        </div>`; break;
-        case 1: html = `<div class="mini-game"><h3>Matrix Typing #${idx+1}</h3>
-          <p>Type random code fast!</p>
-          <button onclick="alert('Typed! Try the games at top for real action.')">Start</button>
-        </div>`; break;
-        case 2: html = `<div class="mini-game"><h3>Guess The Port #${idx+1}</h3>
-          <p>Guess a port (1024-65535)</p>
-          <button onclick="alert('Guessed! Try the games at top for real action.')">Start</button>
-        </div>`; break;
-        case 3: html = `<div class="mini-game"><h3>Cyber Memory #${idx+1}</h3>
-          <p>Remember the code pattern!</p>
-          <button onclick="alert('Memory! Try the games at top for real action.')">Start</button>
-        </div>`; break;
-        case 4: html = `<div class="mini-game"><h3>Random Hacker Game #${idx+1}</h3>
-          <p>Hack the node!</p>
-          <button onclick="alert('Hacked! Try the games at top for real action.')">Start</button>
-        </div>`; break;
-      }
-      return html;
-    }
-    let gameBox = document.getElementById('game-box');
-    // 3 real games at top, then 97 fake mini-games
-    for(let i=3; i<100; i++) {
-      gameBox.innerHTML += createGameDiv(i);
-    }
-
-    // --- Pattern Lock ---
-    // Pattern code: 1-2-5-8 (top-left, top-center, center, bottom-center)
-    const correctPattern = [0,1,4,7]; // 0-based index
-    let pattern = [];
-    const grid = document.getElementById('patternGrid');
-    function renderPatternGrid() {
-      grid.innerHTML = '';
-      for(let i=0;i<9;i++) {
-        let dot = document.createElement('div');
-        dot.className = 'pattern-dot';
-        dot.dataset.idx = i;
-        dot.tabIndex = 0;
-        dot.onmousedown = dot.ontouchstart = e => {
-          if (!pattern.includes(i)) {
-            dot.classList.add('selected');
-            pattern.push(i);
-          }
-        };
-        dot.onmouseover = e => {
-          if (e.buttons || e.type==='touchmove') {
-            if (!pattern.includes(i)) {
-              dot.classList.add('selected');
-              pattern.push(i);
-            }
-          }
-        };
-        grid.appendChild(dot);
-      }
-    }
-    renderPatternGrid();
-
-    let drawing = false;
-    grid.onmousedown = e => { drawing = true; pattern = []; renderPatternGrid(); }
-    grid.onmouseup = e => { drawing = false; checkPattern(); }
-    grid.onmouseleave = e => { if (drawing) { drawing = false; checkPattern(); } }
-    grid.ontouchstart = e => { drawing = true; pattern = []; renderPatternGrid(); }
-    grid.ontouchend = e => { drawing = false; checkPattern(); }
-
-    grid.addEventListener('mousemove', e => {
-      if (!drawing) return;
-      let rect = grid.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      let y = e.clientY - rect.top;
-      let col = Math.floor(x / 74);
-      let row = Math.floor(y / 74);
-      let idx = row*3 + col;
-      if(idx>=0 && idx<9 && !pattern.includes(idx)) {
-        let dot = grid.children[idx];
-        dot.classList.add('selected');
-        pattern.push(idx);
-      }
-    });
-    grid.addEventListener('touchmove', e => {
-      if (!drawing) return;
-      let rect = grid.getBoundingClientRect();
-      let t = e.touches[0];
-      let x = t.clientX - rect.left;
-      let y = t.clientY - rect.top;
-      let col = Math.floor(x / 74);
-      let row = Math.floor(y / 74);
-      let idx = row*3 + col;
-      if(idx>=0 && idx<9 && !pattern.includes(idx)) {
-        let dot = grid.children[idx];
-        dot.classList.add('selected');
-        pattern.push(idx);
-      }
-    });
-
-    function checkPattern() {
-      let status = document.getElementById('patternStatus');
-      if (pattern.length === 0) { status.textContent = ''; return; }
-      if (pattern.length !== correctPattern.length) {
-        status.textContent = "❌ Incorrect pattern length!";
-        setTimeout(() => { status.textContent=''; renderPatternGrid(); }, 800);
-        return;
-      }
-      for(let i=0;i<correctPattern.length;i++) {
-        if(pattern[i]!==correctPattern[i]) {
-          status.textContent = "❌ Wrong pattern!";
-          setTimeout(() => { status.textContent=''; renderPatternGrid(); }, 800);
-          return;
-        }
-      }
-      status.textContent = "✅ Pattern correct! Portal unlocked!";
-      document.getElementById('secretLink').style.display = 'block';
-      setTimeout(() => { status.textContent=''; }, 2000);
-      renderPatternGrid();
     }
   </script>
 </body>
